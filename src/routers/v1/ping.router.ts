@@ -1,13 +1,8 @@
 import express from "express";
+import { pingController } from "../../controllers/ping.controller.js";
 
 const pingRouter = express.Router();
 
-pingRouter.get("/ping", (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: "pong",
-    error: {},
-  });
-});
+pingRouter.get("/ping", pingController);
 
 export default pingRouter;
