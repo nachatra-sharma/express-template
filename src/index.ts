@@ -1,17 +1,11 @@
 import express from "express";
+import v1Router from "./routers/v1/index.router.js";
+import { ServerConfig } from "./config/index.js";
 
 const app = express();
 
-const PORT = 3000;
+app.use("/api", v1Router);
 
-app.get("/", (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: "OK",
-    error: {},
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is up and running on port: ${PORT}`);
+app.listen(ServerConfig.PORT, () => {
+  console.log(`Server is up and running on port: ${ServerConfig.PORT}`);
 });
