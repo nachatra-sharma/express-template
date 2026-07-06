@@ -3,10 +3,12 @@ import {
   UserController,
   UserInfoController,
 } from "../../controllers/user.controller.js";
+import { validateRequestBody } from "../../validators/validator.js";
+import { userBodySchema } from "../../validators/user.validator.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/user", UserController);
+userRouter.get("/user", validateRequestBody(userBodySchema), UserController);
 userRouter.get("/user/:id", UserInfoController);
 
 export default userRouter;
