@@ -15,6 +15,14 @@ export const validateRequestBody = (Schema: ZodObject) => {
             error: error.issues,
           },
         });
+      } else {
+        return res.status(500).json({
+          success: false,
+          message: "Internal Server Error",
+          error: {
+            error: error,
+          },
+        });
       }
     }
   };
@@ -34,6 +42,14 @@ export const validateRequestParams = (schema: ZodObject) => {
             error: error.issues,
           },
         });
+      } else {
+        return res.status(500).json({
+          success: false,
+          message: "Internal Server Error",
+          error: {
+            error: error,
+          },
+        });
       }
     }
   };
@@ -46,11 +62,19 @@ export const validateRequestQuery = (schema: ZodObject) => {
       next();
     } catch (error) {
       if (error instanceof ZodError) {
-        return res.status(401).json({
+        return res.status(400).json({
           success: false,
           message: "Invalid Request Params",
           error: {
             error: error.issues,
+          },
+        });
+      } else {
+        return res.status(500).json({
+          success: false,
+          message: "Internal Server Error",
+          error: {
+            error: error,
           },
         });
       }
