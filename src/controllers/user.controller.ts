@@ -1,10 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
-import {
-  InternalServerError,
-  NotFoundError,
-  type GenericError,
-} from "../utils/error.utils.js";
+import { NotFoundError } from "../utils/error.utils.js";
 
 export const UserController = async (
   req: Request,
