@@ -1,10 +1,17 @@
 import type { NextFunction, Request, Response } from "express";
 import { ZodError, type ZodObject } from "zod";
+import logger from "../config/logger.config.js";
 
 export const validateRequestBody = (Schema: ZodObject) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
+      logger.info("starting validating req body.", {
+        data: req.headers["x-correlation-id"],
+      });
       await Schema.parseAsync(req.body);
+      logger.info("req body validated successfully.", {
+        data: req.headers["x-correlation-id"],
+      });
       next();
     } catch (error) {
       if (error instanceof ZodError) {

@@ -7,8 +7,6 @@ export const UserController = async (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log("req query param: ", req.query);
-  console.log("req body", req.body);
   try {
     await fs.readFile("./sample.txt");
     return res.status(200).json({

@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { envSchema } from "../validators/env.validator.js";
+import logger from "./logger.config.js";
 
 type ServerConfigType = {
   PORT: number;
@@ -12,7 +13,7 @@ function loadEnv() {
   if (!isPortExist.success) {
     throw new Error(isPortExist.error?.issues[0]?.message);
   }
-  console.log("Environment variable loaded successfully!");
+  logger.info("Environment variable loaded successfully!");
 }
 
 loadEnv();
