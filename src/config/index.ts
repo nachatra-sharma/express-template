@@ -12,12 +12,14 @@ function loadEnv() {
 
   if (!isPortExist.success) {
     throw new Error(isPortExist.error?.issues[0]?.message);
+  } else {
+    logger.info("Environment variable loaded successfully!");
+    return isPortExist.data;
   }
-  logger.info("Environment variable loaded successfully!");
 }
 
-loadEnv();
+const PORT = loadEnv();
 
 export const ServerConfig: ServerConfigType = {
-  PORT: Number(process.env.PORT),
+  PORT: PORT,
 };
