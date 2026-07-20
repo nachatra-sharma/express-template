@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
+import { asyncLocalStorage } from "../utils/helpers/helpers.utils.js";
 
 export const attachCorrelationIDMiddleware = (
   req: Request,
@@ -7,7 +8,8 @@ export const attachCorrelationIDMiddleware = (
   next: NextFunction,
 ) => {
   const correlationId = uuidv4();
-  console.log(correlationId);
   req.headers["x-correlation-id"] = correlationId;
-  next();
+  asyncLocalStorage.run({ correlationId: correlationId }, () => {
+    next();
+  });
 };

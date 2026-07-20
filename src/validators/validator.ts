@@ -27,7 +27,7 @@ export const validateRequestBody = (Schema: ZodObject) => {
           success: false,
           message: "Internal Server Error",
           error: {
-            error: error,
+            error: "request body is not acceptable",
           },
         });
       }
@@ -54,7 +54,7 @@ export const validateRequestParams = (schema: ZodObject) => {
           success: false,
           message: "Internal Server Error",
           error: {
-            error: error,
+            error: "request params is not acceptable",
           },
         });
       }
@@ -81,7 +81,7 @@ export const validateRequestQuery = (schema: ZodObject) => {
           success: false,
           message: "Internal Server Error",
           error: {
-            error: error,
+            error: "request query is not acceptable",
           },
         });
       }

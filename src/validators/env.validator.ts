@@ -1,3 +1,5 @@
 import z from "zod";
 
-export const envSchema = z.number().positive().int();
+export const envSchema = z.object({
+  PORT: z.number().positive().int(),
+});

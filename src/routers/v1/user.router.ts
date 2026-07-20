@@ -8,7 +8,7 @@ import { userBodySchema } from "../../validators/user.validator.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/user", validateRequestBody(userBodySchema), UserController);
+userRouter.post("/user", validateRequestBody(userBodySchema), UserController);
 userRouter.get("/user/:id", UserInfoController);
 
 export default userRouter;

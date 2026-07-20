@@ -1,6 +1,6 @@
 import express from "express";
-import v1Router from "./routers/v1/index.router.js";
 import { ServerConfig } from "./config/index.js";
+import v1Router from "./routers/v1/index.router.js";
 import { genericErrorHandler } from "./middlewares/error.middleware.js";
 import logger from "./config/logger.config.js";
 import { attachCorrelationIDMiddleware } from "./middlewares/correlation.middleware.js";

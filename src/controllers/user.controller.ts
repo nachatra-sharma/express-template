@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
 import { NotFoundError } from "../utils/error.utils.js";
+import logger from "../config/logger.config.js";
 
 export const UserController = async (
   req: Request,
@@ -15,7 +16,13 @@ export const UserController = async (
       error: {},
     });
   } catch (error) {
-    throw new NotFoundError("the file was not found");
+    logger.error("Something breaks inside usercontroller", {
+      data: {
+        correlationId: req.headers["x-correlation-id"],
+        error: error,
+      },
+    });
+    throw new NotFoundError("The file was not found");
   }
 };
 
