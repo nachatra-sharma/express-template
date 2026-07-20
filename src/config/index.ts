@@ -2,24 +2,20 @@ import dotenv from "dotenv";
 import { envSchema } from "../validators/env.validator.js";
 import logger from "./logger.config.js";
 
-type ServerConfigType = {
-  PORT: number;
-};
-
 function loadEnv() {
   dotenv.config();
-  const isPortExist = envSchema.safeParse(Number(process.env.PORT));
+  const parsedEnv = envSchema.safeParse({ PORT: Number(process.env.PORT) });
 
-  if (!isPortExist.success) {
-    throw new Error(isPortExist.error?.issues[0]?.message);
+  if (!parsedEnv.success) {
+    throw new Error("PORT: " + parsedEnv.error?.issues[0]?.message);
   } else {
     logger.info("Environment variable loaded successfully!");
-    return isPortExist.data;
+    return parsedEnv.data;
   }
 }
 
-const PORT = loadEnv();
+const env = loadEnv();
 
-export const ServerConfig: ServerConfigType = {
-  PORT: PORT,
+export const ServerConfig = {
+  PORT: env.PORT,
 };
