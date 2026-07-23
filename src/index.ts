@@ -11,8 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(attachCorrelationIDMiddleware);
 app.use("/api", v1Router);
-app.use(genericErrorHandler);
 app.use(notFound);
+app.use(genericErrorHandler);
 
 app.listen(ServerConfig.PORT, () => {
   console.log(`Server is up and running on port: ${ServerConfig.PORT}`);
