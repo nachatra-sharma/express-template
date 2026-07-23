@@ -1,5 +1,5 @@
 import z from "zod";
 
 export const envSchema = z.object({
-  PORT: z.number().positive().int(),
+  PORT: z.coerce.number().int().positive().default(3000),
 });
